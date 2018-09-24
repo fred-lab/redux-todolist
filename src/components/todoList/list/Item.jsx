@@ -1,6 +1,7 @@
 import React from "react";
 import actionCreator from "../../../redux/actionCreators";
 import {connect} from "react-redux"
+import PropTypes from "prop-types";
 
 
 function Item (props){
@@ -28,3 +29,7 @@ function Item (props){
  * Connect to the store
  */
 export default connect()(Item)
+
+Item.proptypes = {
+    text: PropTypes.string.isRequired
+};
