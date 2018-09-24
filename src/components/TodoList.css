@@ -1,0 +1,17 @@
+.todos-lists{
+    display: flex;
+    justify-content: space-between;
+}
+
+div h1 {
+    text-align: center;
+    font-size: 3em;
+    color: #ffffff;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}

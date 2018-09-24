@@ -3,13 +3,15 @@ import actionCreator from "../../../redux/actionCreators";
 import {connect} from "react-redux"
 import PropTypes from "prop-types";
 
+import "./Item.css";
+
 
 function Item (props){
     /**
      * Remove a To-do from the list
      */
     const onRemove = () => {
-        const {index, dispatch} = this.props;
+        const {index, dispatch} = props;
         const {removeTodo} = actionCreator;
 
         /** Update the store*/
@@ -19,9 +21,9 @@ function Item (props){
     const { text } = props;
 
     return (
-        <div>
-            <p>{ text }</p>
-            <span onClick={onRemove}>close</span>
+        <div className="item">
+            <p className="title">{ text }</p>
+            <span className="close" onClick={onRemove}>X</span>
         </div>
     )
 }

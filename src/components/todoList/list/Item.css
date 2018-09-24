@@ -1,0 +1,26 @@
+.item{
+    display: flex;
+    background-color: #5ac8fa;
+    border: 0.05em solid #ababab;
+    border-radius: 0.5em;
+    width: 30em;
+    padding: 0.5em;
+    justify-content: center;
+    color: #ffffff;
+    margin: 0.5em;
+    position: relative;
+}
+
+.title{
+    letter-spacing: 0.2em;
+    font-size: 1.2em;
+    font-weight: bolder;
+}
+
+.close{
+    cursor: pointer;
+    color: #ff313a;
+    font-weight: bolder;
+    position: absolute;
+    right: 0.5em;
+}

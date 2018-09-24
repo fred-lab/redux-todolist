@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 import actionCreator from "../../redux/actionCreators";
-import {connect} from "react-redux"
+import {connect} from "react-redux";
+
+import "./Input.css";
 
 const mapStateToProps = state =>({
     todoList: state.todoList
@@ -30,6 +32,8 @@ class Input extends Component {
 
         /** Update the store */
         dispatch(addTodo(value))
+
+        this.setState({value: ""})
     };
 
     render(){
@@ -37,8 +41,10 @@ class Input extends Component {
 
         return (
             <input
+                className="input"
                 type="text"
                 value={value}
+                placeholder="Appuyer sur entrée pour ajouter une tâche"
                 onChange={event => this.setState({value: event.target.value})}
                 onKeyPress={event => this.addTodo(event)}
             />
