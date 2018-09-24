@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import PropTypes from "prop-types";
 
 import "./List.css";
+import actionCreator from "../../redux/actionCreators";
 
 const mapStateToProps = state =>({
     todoList: state.todoList
@@ -16,7 +17,7 @@ class List extends Component{
         this.dropZone = React.createRef();
 
         this.state = {
-            isHover : false
+            isHover : false,
         }
     }
 
@@ -25,13 +26,18 @@ class List extends Component{
         this.setListeners(['dragenter', 'dragover', 'dragleave', 'drop'], this.preventDefaults);
 
         /** When a element enter in the drop zone, highlight the drop zone **/
-        this.setListeners(['dragenter', 'dragover'], e => this.setState(() => ({isHover: true})));
+        this.setListeners(['dragenter', 'dragover'], () => this.setState(() => ({isHover: true})));
 
         /** When a element leave (or drop in) the drop zone, unhighlight the drop zone **/
-        this.setListeners(['dragleave', 'drop'], e => this.setState(() => ({isHover: false})));
+        this.setListeners(['dragleave', 'drop'], () => this.setState(() => ({isHover: false})));
 
-        /** Handle the file on the drop event **/
-        this.setListeners(['drop'], e => console.log('drop'));
+        /** Get the element currently dragged */
+        this.setListeners(['dragstart'], e => e.dataTransfer.setData("id", e.target.id));
+
+        /** Handle the element on the drop event **/
+        // this.setListeners(['drop'], e => console.log('drop', e.dataTransfer.getData("id"), this.props.status));
+        this.setListeners(['drop'], e => this.updateTodoStatus(e.dataTransfer.getData("id"), this.props.status));
+
     }
 
 
@@ -55,22 +61,31 @@ class List extends Component{
         event.stopPropagation();
     }
 
+    updateTodoStatus(id, status){
+        const {dispatch} = this.props;
+        const {updateStatus} = actionCreator;
+
+        /** Update the store*/
+        dispatch(updateStatus(id, status))
+    }
 
     /**
      * Render the component
      * @returns {*}
      */
     render(){
-        const {todoList, title, color} = this.props;
+        const {todoList, title, color, status} = this.props;
         const {isHover} = this.state;
 
         return (
-            <div className={ isHover ? "list-hover list list-border-" + color : "list list-border-" + color} ref={this.dropZone}>
+            <div id={status} className={ isHover ? "list-hover list list-border-" + color : "list list-border-" + color} ref={this.dropZone}>
                 <div className={"title list-title list-title-" + color}>
                     <h2>{title}</h2>
                 </div>
                 {
-                    todoList.map( (todo, index) => <Item key={index} text={todo} index={index}/>)
+                    todoList
+                        .filter(todo => todo.status === status)
+                        .map( (todo, index) => <Item key={index} todo={todo} id={todo.id} />)
                 }
             </div>
         )
@@ -87,5 +102,6 @@ export default connect(
 List.proptypes = {
     todoList: PropTypes.array.isRequired,
     title: PropTypes.string.isRequired,
-    color: PropTypes.string.isRequired
+    color: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
 };

@@ -10,20 +10,20 @@ function Item (props){
     /**
      * Remove a To-do from the list
      */
-    const onRemove = () => {
-        const {index, dispatch} = props;
+    const onRemove = (todo) => {
+        const {dispatch} = props;
         const {removeTodo} = actionCreator;
 
         /** Update the store*/
-        dispatch(removeTodo(index))
+        dispatch(removeTodo(todo))
     };
 
-    const { text } = props;
+    const { todo, id } = props;
 
     return (
-        <div className="item" draggable="true">
-            <p className="title">{ text }</p>
-            <span className="close" onClick={onRemove}>X</span>
+        <div className="item" draggable="true" id={id}>
+            <p className="title">{ todo.title }</p>
+            <span className="close" onClick={() => onRemove(todo)}>X</span>
         </div>
     )
 }

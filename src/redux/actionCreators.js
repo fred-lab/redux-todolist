@@ -5,15 +5,19 @@ export default {
         type: types.ADD_TODO,
         payload: todo
     }),
-    removeTodo : (index) => ({
+    removeTodo : (todo) => ({
         type: types.REMOVE_TODO,
-        payload: index
+        payload: todo
     }),
-    editTodo : (index, todo) => ({
+    editTodo : (todo) => ({
         type: types.EDIT_TODO,
+        payload: todo
+    }),
+    updateStatus: (id, status) => ({
+        type: types.UPDATE_STATUS,
         payload: {
-            index,
-            todo
+            id,
+            status
         }
     })
 }

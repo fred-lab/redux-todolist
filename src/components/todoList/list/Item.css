@@ -9,6 +9,7 @@
     color: #ffffff;
     margin: 0.5em;
     position: relative;
+    cursor: grabbing;
 }
 
 .title{
