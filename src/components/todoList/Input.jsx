@@ -47,7 +47,7 @@ class Input extends Component {
 }
 
 /**
- * Subscribe the component to the store update
+ * Connect to the store and subscribe to the update
  */
 export default connect(
     mapStateToProps

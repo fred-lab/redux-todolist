@@ -1,16 +1,13 @@
-import React, {Component} from "react";
+import React from "react";
 import actionCreator from "../../../redux/actionCreators";
 import {connect} from "react-redux"
 
-class Item extends Component {
-    constructor(props){
-        super(props);
-    }
 
+function Item (props){
     /**
      * Remove a To-do from the list
      */
-    onRemove = () => {
+    const onRemove = () => {
         const {index, dispatch} = this.props;
         const {removeTodo} = actionCreator;
 
@@ -18,16 +15,16 @@ class Item extends Component {
         dispatch(removeTodo(index))
     };
 
-    render(){
-        const { text } = this.props;
+    const { text } = props;
 
-        return (
-            <div>
-                <p>{ text }</p>
-                <span onClick={this.onRemove}>close</span>
-            </div>
-        )
-    }
+    return (
+        <div>
+            <p>{ text }</p>
+            <span onClick={onRemove}>close</span>
+        </div>
+    )
 }
-
+/**
+ * Connect to the store
+ */
 export default connect()(Item)
