@@ -1,28 +1,33 @@
 import React, {Component} from "react";
+import actionCreator from "../../../redux/actionCreators";
+import {connect} from "react-redux"
 
-export default class Input extends Component {
+class Item extends Component {
     constructor(props){
         super(props);
-
-        this.onRemove = this.onRemove.bind(this)
     }
 
     /**
      * Remove a To-do from the list
-     * @param index
      */
-    onRemove(index){
-        console.log(index)
-    }
+    onRemove = () => {
+        const {index, dispatch} = this.props;
+        const {removeTodo} = actionCreator;
+
+        /** Update the store*/
+        dispatch(removeTodo(index))
+    };
 
     render(){
-        const { text, index } = this.props;
+        const { text } = this.props;
 
         return (
             <div>
                 <p>{ text }</p>
-                <span onClick={ () => this.onRemove(index) }>*</span>
+                <span onClick={this.onRemove}>close</span>
             </div>
         )
     }
 }
+
+export default connect()(Item)

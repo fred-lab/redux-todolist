@@ -1,6 +1,10 @@
 import types from "./types";
 
-export const initialState = {
+/**
+ * Initiate a state with defaults values
+ * @type {{todoList: string[]}}
+ */
+const initialState = {
     todoList : [
         "Apprendre React",
         "Comprendre Redux",
@@ -8,13 +12,18 @@ export const initialState = {
     ]
 };
 
-export const rootReducer = (state = initialState, action) => {
+/**
+ * Root reducer
+ * @param state
+ * @param action
+ * @returns {{todoList: string[]}}
+ */
+export default (state = initialState, action) => {
     const {todoList} = state;
     const {type, payload} = action;
 
     switch (type) {
         case types.ADD_TODO:
-            /** Comme le state peut être différent de celui de initialState, il vaut mieux réinjecter le state puis modifié la propriété adéquat */
             return {
                 ...state,
                 todoList : [payload, ...todoList]

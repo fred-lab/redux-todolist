@@ -1,13 +1,54 @@
 import React, {Component} from "react";
+import actionCreator from "../../redux/actionCreators";
+import {connect} from "react-redux"
 
-export default class Input extends Component {
+const mapStateToProps = state =>({
+    todoList: state.todoList
+});
+
+class Input extends Component {
     constructor(props){
-        super(props)
+        super(props);
+
+        this.state = {
+            value: ""
+        }
     }
 
+    /**
+     * Add a to-do to the store
+     * @param event
+     */
+    addTodo = event => {
+        const {value} = this.state;
+        const {dispatch} = this.props;
+        const {addTodo} = actionCreator;
+
+        if(event.key !== "Enter" || !value){
+            return;
+        }
+
+        /** Update the store */
+        dispatch(addTodo(value))
+    };
+
     render(){
+        const {value} = this.state;
+
         return (
-            <input type="text"/>
+            <input
+                type="text"
+                value={value}
+                onChange={event => this.setState({value: event.target.value})}
+                onKeyPress={event => this.addTodo(event)}
+            />
         )
     }
 }
+
+/**
+ * Subscribe the component to the store update
+ */
+export default connect(
+    mapStateToProps
+)(Input)

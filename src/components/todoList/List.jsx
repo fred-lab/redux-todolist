@@ -1,7 +1,12 @@
 import React, {Component} from "react";
 import Item from "./list/Item";
+import {connect} from "react-redux"
 
-export default class Input extends Component {
+const mapStateToProps = state =>({
+    todoList: state.todoList
+});
+
+class List extends Component {
     constructor(props){
         super(props)
     }
@@ -18,3 +23,7 @@ export default class Input extends Component {
         )
     }
 }
+
+export default connect(
+    mapStateToProps
+)(List)

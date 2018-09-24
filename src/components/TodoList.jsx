@@ -8,8 +8,6 @@ export default class TodoList extends Component {
     }
 
     render(){
-        /** Todo A supprimer */
-        const list = ['toto', 'titi', 'tata'];
 
         return (
             <div>
@@ -17,7 +15,7 @@ export default class TodoList extends Component {
                 <p>Ajouter une to-do</p>
                 <InputTodo />
                 <p>Editer une todo en cliquant dessus</p>
-                <List todoList={list}/>
+                <List />
             </div>
         )
     }
