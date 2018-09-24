@@ -1,6 +1,7 @@
 .todos-lists{
     display: flex;
     justify-content: space-between;
+    width: 95%;
 }
 
 div h1 {

@@ -21,7 +21,7 @@ function Item (props){
     const { text } = props;
 
     return (
-        <div className="item">
+        <div className="item" draggable="true">
             <p className="title">{ text }</p>
             <span className="close" onClick={onRemove}>X</span>
         </div>

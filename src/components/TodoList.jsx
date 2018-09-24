@@ -11,7 +11,7 @@ export default function TodoList (){
             <InputTodo />
             <section className="todos-lists">
                 <List title="En Attente" color="blue"/>
-                <List title="En cours" color="green"/>
+                <List title="En cours" color="green" />
                 <List title="Terminé" color="orange"/>
             </section>
         </div>
